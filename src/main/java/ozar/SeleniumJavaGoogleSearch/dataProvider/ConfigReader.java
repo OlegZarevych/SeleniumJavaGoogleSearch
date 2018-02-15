@@ -12,7 +12,7 @@ import ozar.SeleniumJavaGoogleSearch.Browser.Browsers;
 public class ConfigReader {
 
 	private final String propertyFilePath = "config//Configurations.properties";
-	private Properties properties;
+	private static Properties properties;
 
 	public ConfigReader(){
 		BufferedReader reader;
@@ -31,12 +31,12 @@ public class ConfigReader {
 		}		
 	}
 
-	public Browsers getBrowserType()
+	public static Browsers getBrowserType()
 	{
 		return Browsers.valueOf(getDriverName());
 	}
 	
-	private String getDriverName() {
+	private static String getDriverName() {
 		String driver = properties.getProperty("driver");
 		if (driver != null)
 			return driver;

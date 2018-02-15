@@ -8,7 +8,7 @@ public class BrowserFactory {
 
 	public Browser getBrowser() {
 
-		switch (getBrowserType()) {
+		switch (ConfigReader.getBrowserType()) {
 		case CHROME:
 			browser = new ChromeBrowser();
 		default:
@@ -16,11 +16,6 @@ public class BrowserFactory {
 		}
 
 		return browser;
-	}
-
-	private Browsers getBrowserType() {
-		ConfigReader configReader = new ConfigReader();
-		return configReader.getBrowserType();
 	}
 
 }

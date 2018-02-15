@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import ozar.SeleniumJavaGoogleSearch.Browser.Browser;
+import ozar.SeleniumJavaGoogleSearch.Browser.Browsers;
+
 public class ConfigReader {
 
 	private final String propertyFilePath = "config//Configurations.properties";
@@ -28,12 +31,17 @@ public class ConfigReader {
 		}		
 	}
 
-	public String getDriverPath() {
-		String driverPath = properties.getProperty("driverPath");
-		if (driverPath != null)
-			return driverPath;
+	public Browsers getBrowserType()
+	{
+		return Browsers.valueOf(getDriverName());
+	}
+	
+	private String getDriverName() {
+		String driver = properties.getProperty("driver");
+		if (driver != null)
+			return driver;
 		else
-			throw new RuntimeException("driverPath not specified in the Configuration.properties file.");
+			throw new RuntimeException("driver not specified in the Configuration.properties file.");
 	}
 
 }

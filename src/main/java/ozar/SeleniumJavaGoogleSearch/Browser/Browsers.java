@@ -1,5 +1,5 @@
 package ozar.SeleniumJavaGoogleSearch.Browser;
 
 public enum Browsers {
-	CHROME, FF, GHOST;
+	CHROME, FF, PHANTOM;
 }

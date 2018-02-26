@@ -36,6 +36,11 @@ public class ConfigReader {
 		return Browsers.valueOf(getDriverName());
 	}
 	
+	public static String getUrl()
+	{
+		return properties.getProperty("url");
+	}
+	
 	private static String getDriverName() {
 		String driver = properties.getProperty("driver");
 		if (driver != null)

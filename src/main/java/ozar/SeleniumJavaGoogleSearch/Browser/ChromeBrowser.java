@@ -25,4 +25,9 @@ public class ChromeBrowser extends Browser {
 		if (driver != null)
 			driver.navigate().to(url);
 	}
+	
+	@Override
+	public String title() {
+		return driver.getTitle();
+	}
 }

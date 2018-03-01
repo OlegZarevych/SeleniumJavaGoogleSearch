@@ -4,15 +4,17 @@ import ozar.SeleniumJavaGoogleSearch.dataProvider.ConfigReader;
 
 public class BrowserFactory {
 
-	private Browser browser;
+	private static Browser browser;
 
-	public Browser getBrowser() {
+	public static Browser getBrowser() {
 
 		switch (ConfigReader.getBrowserType()) {
 		case CHROME:
 			browser = new ChromeBrowser();
+		case FF:
+			browser = new GeckoBrowser();
 		default:
-			browser = new ChromeBrowser();
+			browser = new GeckoBrowser();
 		}
 
 		return browser;

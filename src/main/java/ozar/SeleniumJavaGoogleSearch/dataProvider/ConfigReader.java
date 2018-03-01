@@ -1,36 +1,37 @@
 package ozar.SeleniumJavaGoogleSearch.dataProvider;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
-import ozar.SeleniumJavaGoogleSearch.Browser.Browser;
 import ozar.SeleniumJavaGoogleSearch.Browser.Browsers;
 
-public class ConfigReader {
+public final class ConfigReader {
 
-	private final String propertyFilePath = "config//Configurations.properties";
+	private static final String propertyFilePath = "Configurations.properties";
 	private static Properties properties;
-
-	public ConfigReader(){
-		BufferedReader reader;
-		try {
-			reader = new BufferedReader(new FileReader(propertyFilePath));
+	
+	private static final ConfigReader instance = new ConfigReader();
+	   	   
+	   private ConfigReader()
+	   {
+			//BufferedReader reader;
+			//reader = new BufferedReader(new FileReader(inputStream));
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFilePath);
 			properties = new Properties();
 			try {
-				properties.load(reader);
-				reader.close();
+				properties.load(inputStream);
+				//reader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Configuration.properties not found at " + propertyFilePath);
-		}		
-	}
+			}	
+	   }  
 
+		public static ConfigReader getInstance() 
+		{
+		     return instance;
+		}   
+	   
 	public static Browsers getBrowserType()
 	{
 		return Browsers.valueOf(getDriverName());
@@ -38,10 +39,22 @@ public class ConfigReader {
 	
 	public static String getUrl()
 	{
-		return properties.getProperty("url");
+		return getUrlProperties();
 	}
 	
-	private static String getDriverName() {
+	private static String getUrlProperties()
+	{
+		getInstance();
+		String driver = properties.getProperty("url");
+		if (driver != null)
+			return driver;
+		else
+			throw new RuntimeException("url not specified in the Configuration.properties file.");
+	}
+	
+	private static String getDriverName() 
+	{
+		getInstance();
 		String driver = properties.getProperty("driver");
 		if (driver != null)
 			return driver;

@@ -13,8 +13,6 @@ public class BrowserFactory {
 			browser = new ChromeBrowser();
 		case FF:
 			browser = new GeckoBrowser();
-		case PHANTOM:
-			browser = new PhantomBrowser();
 		default:
 			browser = new GeckoBrowser();
 		}

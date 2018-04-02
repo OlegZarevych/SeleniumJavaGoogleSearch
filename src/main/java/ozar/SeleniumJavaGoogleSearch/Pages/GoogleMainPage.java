@@ -17,11 +17,11 @@ public class GoogleMainPage {
 	 @FindBy(name = "btnK")
 	 private WebElement searchButton;
 	
-	 public void searchTest(String text)
+	 public SearchResultPage searchText(String text)
 	 {
 		 searchField.sendKeys(text);
 		 searchButton.submit();
-		 // return new SearchResultPage();
+		 return new SearchResultPage();
 	 }
 	 
 	 public boolean IsSearchVisible()
